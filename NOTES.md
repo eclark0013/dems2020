@@ -10,8 +10,7 @@ program
 1. interface
 
 ~Puts -
-There are many candidates running for the democratic nomination for president. Would you like to know more about an individual candidate (bio, previous experience) or the race in general (updated list of candidates running, polling numbers). Type C for candidate or R for race.
-At any time, you may type "help" or "menu" to return to this menu. When you have deicde who to vote for, you may type in "exit".
+"There are many candidates running for the democratic nomination for president. Would you like to know more about a specific candidate (bio, previous experience) or the race in general (updated list of candidates running, polling numbers). Type C for candidates or R for race. Follow the on-screen prompts. When you have decided who to vote for, you may type in \"exit\"."
 
   ~if C
     Which candidate would you like to know more about?
