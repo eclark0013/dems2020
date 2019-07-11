@@ -34,6 +34,7 @@ class Dems2020::CLI
           Type \"C\" for more information on a specific candidate.
           Type \"R\" for more information on the race in general.
           Type \"exit\" to exit."
+        @input = gets.strip
       end
     end
   end
@@ -42,6 +43,7 @@ class Dems2020::CLI
     puts "There are many candidates running for the democratic nomination for president. Would you like to know more about a specific candidate (bio, previous experience) or the race in general (updated list of candidates running, polling numbers). Type C for candidates or R for race. Follow the on-screen prompts. When you have decided who to vote for, you may type in \"exit\"."
   end
 
+  # candidates methods
   def display_candidates
     puts "List of candidates:"
     @candidates.each_with_index {|name,index| puts "#{index+1}. #{name}"}
@@ -65,6 +67,7 @@ class Dems2020::CLI
     @input = gets.strip # gets choice for main menu of C, R, or exit
   end
 
+  # race methods
   def race_info_prompt
     puts "What would you like to know?
         \"C\" for a list of candidates still in the race
@@ -94,6 +97,7 @@ class Dems2020::CLI
         \"C\" for a list of candidates still in the race
         \"P\" for most recent polling data
         \"D\" for info on upcoming debates"
+        @input = gets.strip
       end
     end
 #    input # returns input in case of user typing "exit"
