@@ -67,6 +67,7 @@ class Dems2020::CLI
   end
 
   def display_candidate_info(chosen_candidate)
+
     WikipediaScraper.candidate_info(chosen_candidate).each do |category, info|
       puts "#{category}: #{info}"
     end
