@@ -19,10 +19,10 @@ class Dems2020::CLI
       case input
       when "C" # display list of candidates and use @candidates which has already been scraped from ballotbedia
         display_candidates
-        manage_candidate_choice
+        input = manage_candidate_choice
       when "R"
         display_race_info
-        manage_race_info_choice
+        input = manage_race_info_choice
       when "exit"
       else
         puts "Your choices are:
@@ -54,7 +54,7 @@ class Dems2020::CLI
     chosen_candidate = @candidates[input.to_i-1]
     puts "wikipedia info of #{chosen_candidate}"
     puts "Would you like to know about another candidate or about the race in general? Type C for candidate or R for race."
-    #end
+    input # returns input in case of user typing "exit"
   end
 
   def display_race_info
@@ -65,13 +65,13 @@ class Dems2020::CLI
   end
 
   def manage_race_info_choice
-    race_input = nil
-    until race_input == "exit" # creates a loop that allows user to continually access a list of candidates or race-info but stops if user types exit
-      race_input = gets.strip
-      case race_input # double case here?
+    input = nil
+    until input == "exit" # creates a loop that allows user to continually access a list of candidates or race-info but stops if user types exit
+      input = gets.strip
+      case input # double case here?
         when "C"
-          puts "Here is a list of candidates still in the race"
-          puts "Would you like to know about another candidate or about the race in general? Type C for candidate or R for race. Or \"exit\""
+          display_race_info
+          manage_candidate_choice
         when "P"
           puts "Here is the most recent polling data"
           puts "Would you like to know about another candidate or about the race in general? Type C for candidate or R for race. Or \"exit\""
@@ -86,6 +86,7 @@ class Dems2020::CLI
         \"D\" for important dates including upcoming debates, primaries and conventions"
       end
     end
+    input # returns input in case of user typing "exit"
   end
 
 
