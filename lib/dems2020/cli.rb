@@ -1,6 +1,4 @@
-require_relative "./ballotpediascraper"
-require_relative "./wikipediascraper"
-require_relative "./realclearpoliticsscraper"
+require "./lib/environment"
 
 class Dems2020::CLI
   attr_accessor :candidates, :input

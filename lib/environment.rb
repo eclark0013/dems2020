@@ -1,0 +1,6 @@
+require "open-uri"
+require "nokogiri"
+require "./lib/dems2020/ballotpediascraper"
+require "./lib/dems2020/wikipediascraper"
+require "./lib/dems2020/realclearpoliticsscraper"
+require "pry"
