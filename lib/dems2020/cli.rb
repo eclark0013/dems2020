@@ -1,5 +1,6 @@
 require_relative "./ballotpediascraper"
 require_relative "./wikipediascraper"
+require_relative "./realclearpoliticsscraper"
 
 class Dems2020::CLI
   attr_accessor :candidates, :input
@@ -67,6 +68,12 @@ class Dems2020::CLI
     @input = gets.strip # gets choice for main menu of C, R, or exit
   end
 
+  def display_candidate_info(chosen_candidate)
+    WikipediaScraper.candidate_info(chosen_candidate).each do |category, info|
+      puts "#{category}: #{info}"
+    end
+  end
+
   # race methods
   def race_info_prompt
     puts "What would you like to know?
@@ -84,7 +91,7 @@ class Dems2020::CLI
           candidate_info_prompt
           manage_candidate_choice
         when "P"
-          puts "Here is the most recent polling data"
+          display_polling_info
           main_menu_prompt
           @input = gets.strip # gets choice for main menu of C, R, or exit
         when "D"
@@ -103,10 +110,6 @@ class Dems2020::CLI
 #    input # returns input in case of user typing "exit"
   end
 
-  def main_menu_prompt
-    puts "Would you like to know about another candidate or about the race in general? Type C for candidate or R for race. Or \"exit\""
-  end
-
   def display_debate_info
     puts "Upcoming debates:"
     BallotpediaScraper.dates.each do |date|
@@ -114,12 +117,16 @@ class Dems2020::CLI
     end
   end
 
-  def display_candidate_info(chosen_candidate)
-    WikipediaScraper.candidate_info(chosen_candidate).each do |category, info|
-      puts "#{category}: #{info}"
+  def display_polling_info
+    puts "Current polling averages via RealClearPolitics:"
+    RCPScraper.polling_info.each do |candidate, percentage|
+      puts "#{candidate}: #{percentage}%"
     end
   end
 
+  def main_menu_prompt
+    puts "Would you like to know about another candidate or about the race in general? Type C for candidate or R for race. Or \"exit\""
+  end
 
   def send_off
     puts "Good luck. May the odds be ever in your favor."
