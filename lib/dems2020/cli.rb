@@ -1,7 +1,7 @@
 require "./lib/environment"
 
 class Dems2020::CLI
-  attr_accessor :candidates, :input
+  attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
     @candidates = BallotpediaScraper.candidates #scrape candidates here
@@ -58,17 +58,14 @@ class Dems2020::CLI
       puts "Choose from a number in the list above."
       @input = gets.strip
     end
-    #if input != "exit"
-    chosen_candidate = @candidates[@input.to_i-1]
-    display_candidate_info(chosen_candidate)
-    # WikipediaScraper.candidate_info(chosen_candidate)
+    @chosen_candidate = @candidates[@input.to_i-1]
+    display_candidate_info
     main_menu_prompt
     @input = gets.strip # gets choice for main menu of C, R, or exit
   end
 
-  def display_candidate_info(chosen_candidate)
-
-    WikipediaScraper.candidate_info(chosen_candidate).each do |category, info|
+  def display_candidate_info
+    WikipediaScraper.new.candidate_info(@chosen_candidate).each do |category, info|
       puts "#{category}: #{info}"
     end
   end
