@@ -7,6 +7,7 @@ class WikipediaScraper
     # use the name argument to create a URL to scrape
     age = nil
     education = []
+    bio = nil
     @underscore_name = nil
     if name.end_with? "Castro"
       @underscore_name = "Julian_Castro"
@@ -39,8 +40,14 @@ class WikipediaScraper
 #          education << school + ")"
 #        end
 #      end
-    binding.pry
-    bio = "doing stuff"
+#  doc.css("div.vertical-navbox nowraplinks vcard hlist") div.mw-parser-output
+# doc.css("div.mw-parser-output p")[2].children.first.name
+    doc.css("div.mw-parser-output p").each do |paragraph|
+      if paragraph.children.first.name == "b"
+        bio = paragraph.text
+      end
+    end
+
     info =  {
       name: name,
       age: age,
