@@ -1,3 +1,5 @@
+require "./lib/environment"
+
 class CandidateScraper
 
   def self.candidates # https://ballotpedia.org/Presidential_candidates,_2020

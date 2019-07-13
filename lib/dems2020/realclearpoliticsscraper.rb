@@ -1,3 +1,5 @@
+require "./lib/environment"
+
 class RCPScraper
   attr_accessor :result, :candidates
 

@@ -1,4 +1,5 @@
 require_relative "./cli"
+require "./lib/environment"
 
 class WikipediaScraper
   attr_accessor :name, :underscore_name, :age, :education, :bio, :doc, :info
@@ -6,6 +7,8 @@ class WikipediaScraper
   def initialize(name)
     @education = []
     @name = name
+    make_underscore_name
+    @doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/#{@underscore_name}"))
   end
 
   def make_underscore_name
@@ -23,8 +26,6 @@ class WikipediaScraper
   end
 
   def candidate_info
-    make_underscore_name
-    @doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/#{@underscore_name}"))
     find_age
     find_education
     find_bio
@@ -40,12 +41,22 @@ class WikipediaScraper
   end
 
   def find_education
-    @doc.css("tbody tr td a").each do |link|
-      if ["niversity", "ollege"].any? {|word| link.text.include? (word)}
-        @education << link.text
+    @doc.css("tbody tr").each do |tr|
+      tr.css("th").each do |th|
+        if th.text == "Education"
+          tr.css("td a").each do |link|
+            @education << link.text
+          end
+        end
+      end
+    end
+    @education.each do |school|
+      if school.length < 5
+        @education = @education - [school]
       end
     end
   end
+
 
   def find_bio
     last_name = @name.split(" ").last
