@@ -115,7 +115,7 @@ class Dems2020::CLI
 
   def display_polling_info
     puts "Current polling averages via RealClearPolitics:"
-    RCPScraper.polling_info.each do |candidate, percentage|
+    RCPScraper.new.polling_data.each do |candidate, percentage|
       puts "#{candidate}: #{percentage}%"
     end
   end
