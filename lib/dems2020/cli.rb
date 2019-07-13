@@ -4,7 +4,7 @@ class Dems2020::CLI
   attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
-    @candidates = BallotpediaScraper.candidates #scrape candidates here
+    @candidates = CandidatesScraper.candidates #scrape candidates here
     @input = nil
   end
 
@@ -108,7 +108,7 @@ class Dems2020::CLI
 
   def display_debate_info
     puts "Upcoming debates:"
-    BallotpediaScraper.dates.each do |date|
+    DebateScraper.dates.each do |date|
       puts date
     end
   end
