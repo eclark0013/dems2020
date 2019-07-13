@@ -40,9 +40,9 @@ class Dems2020::CLI
 
   def invalid_main_menu_choice
     puts "Your choices are:
-      Type \"C\" for more information on a specific candidate.
-      Type \"R\" for more information on the race in general.
-      Type \"exit\" to exit."
+    Type \"C\" for more information on a specific candidate.
+    Type \"R\" for more information on the race in general.
+    Type \"exit\" to exit."
     @input = gets.strip
   end
 
@@ -87,9 +87,9 @@ class Dems2020::CLI
   # race methods
   def race_info_prompt
     puts "What would you like to know?
-        \"C\" for a list of candidates still in the race
-        \"P\" for most recent polling data
-        \"D\" for info on upcoming debates"
+    \"C\" for a list of candidates still in the race
+    \"P\" for most recent polling data
+    \"D\" for info on upcoming debates"
     @input = gets.strip
   end
 
