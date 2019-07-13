@@ -55,6 +55,13 @@ class WikipediaScraper
         @education = @education - [school]
       end
     end
+#    @education.each_with_index do |school,i|
+#      if @education[i+1] == nil #make it not do the last one
+#      elsif @education[i+1].length < 5
+#        @education[i] = "#{school} (#{@education[i+1]})" # adds on their BA or JD designation to that school
+#        @education = @education - [@education[i+1]] # removes their BA or JD designation as a separate school
+#      end
+#    end
   end
 
 
@@ -72,7 +79,7 @@ class WikipediaScraper
     @info =  {
       name: @name,
       age: @age,
-      education: @education.join(" and "),
+      education: @education.join(", "),
       bio: @bio
     }
   end
