@@ -107,9 +107,9 @@ class Dems2020::CLI
   end
 
   def display_debate_info
-    puts "Upcoming debates:"
-    DebateScraper.dates.each do |date|
-      puts date
+    puts "Primary debates:"
+    DebateScraper.new.find_debates.each do |debate|
+      puts debate
     end
   end
 

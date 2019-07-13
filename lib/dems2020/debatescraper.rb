@@ -1,21 +1,26 @@
 require "./lib/environment"
 
-class DebatesScraper
-  attr_accessor :
+class DebateScraper
+  attr_accessor :debates
 
+  def initialize
+    @debates = []
+  end
 
-  def self.dates # https://ballotpedia.org/Important_dates_in_the_2020_presidential_race scrollable-table-container
+  def debates
+    @debates
+  end
+
+  def find_debates # https://ballotpedia.org/Important_dates_in_the_2020_presidential_race 
     doc = Nokogiri::HTML(open("https://ballotpedia.org/Important_dates_in_the_2020_presidential_race#Democratic_presidential_primary_debates"))
-    binding.pry
-    # doc.css("div.mw-content-ltr table div.bp-dropdown-menu")
-    # doc.css("div.mw-content-ltr table td")
-    # doc.css("div.mw-content-ltr table").css("p")
-    # doc.css("div.mw-content-ltr table").css("td a")[50].text
     doc.css("div.mw-content-ltr table td").each_with_index do |table_cell, i|
-      if table_cell.include? "debate"
-
-    doc.css("div.mobile-columns a")[i].text
-    upcoming_debates = ["First debate - July 1", "Second Debate - August 1"]
+      if table_cell.text.include? "debate"
+        debate = table_cell.text.strip
+        date = doc.css("div.mw-content-ltr table td")[i+1].text.strip
+        @debates << "#{debate} on #{date}"
+      end
+    end
+    @debates
   end
 
 end
