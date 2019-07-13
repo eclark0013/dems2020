@@ -44,12 +44,12 @@ class Dems2020::CLI
 
   # candidates methods
   def display_candidates
-    puts "List of candidates:"
+    puts "\nList of candidates:"
     @candidates.each_with_index {|name,index| puts "#{index+1}. #{name}"}
   end
 
   def candidate_info_prompt
-    puts "Select a candidate from the list above using the number beside their name for more information."
+    puts "\nSelect a candidate from the list above using the number beside their name for more information."
     @input = gets.strip
   end
 
@@ -65,9 +65,11 @@ class Dems2020::CLI
   end
 
   def display_candidate_info
+    puts "\n"
     WikipediaScraper.new(@chosen_candidate).candidate_info.each do |category, info|
-      puts "#{category}: #{info}"
+      puts "#{category.capitalize}: #{info}"
     end
+    puts "\n"
   end
 
   # race methods
@@ -103,7 +105,6 @@ class Dems2020::CLI
         @input = gets.strip
       end
     end
-#    input # returns input in case of user typing "exit"
   end
 
   def display_debate_info

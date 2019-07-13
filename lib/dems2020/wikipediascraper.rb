@@ -23,7 +23,6 @@ class WikipediaScraper
   end
 
   def candidate_info
-    # use the name argument to create a URL to scrape
     make_underscore_name
     @doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/#{@underscore_name}"))
     find_age
@@ -49,14 +48,14 @@ class WikipediaScraper
   end
 
   def find_bio
+    last_name = @name.split(" ").last
     @doc.css("div.mw-parser-output p").each do |paragraph|
-      if paragraph.children.first.name == "b"
-        @bio = paragraph.text
+      if paragraph.css("b").text.include? last_name
+        @bio = paragraph.text.gsub(/\[\d*\]/, "")
       end
     end
   end
-  # check booker, O'Rourke, Sestak, williamson (take out [num])
-  # maybe redo this? if there is bold inside another section it gets the last bold thing
+
 
   def compile_info
     @info =  {
@@ -65,7 +64,6 @@ class WikipediaScraper
       education: @education.join(" and "),
       bio: @bio
     }
-    @info
   end
 
 
