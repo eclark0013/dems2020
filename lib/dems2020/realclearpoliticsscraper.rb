@@ -1,38 +1,29 @@
 class RCPScraper
-  attr_accessor :result
+  attr_accessor :result, :candidates
 
   def initialize
     @result = {}
-  end
-
-  def result
-    @result
+    @candidates = []
+    @percentages = []
   end
 
   def polling_data # https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html
     doc = Nokogiri::HTML(open("https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html"))
-    # doc.css("div#polling-data-rcp th.diag").first.text.strip
-    people = []
-    doc.css("div#polling-data-rcp th.diag").each do |person|
-      people << person.text.strip
+
+    doc.css("div#polling-data-rcp th.diag").each do |candidate|
+      @candidates << candidate.text.strip
     end
 
-    numbers = []
-    doc.css("div#polling-data-rcp tr.rcpAvg td").each_with_index do |number, index|
+    doc.css("div#polling-data-rcp tr.rcpAvg td").each_with_index do |percentage, index|
       if index<2
       else
-        numbers << number.text
+        @percentages << percentage.text
       end
     end
-    numbers.pop
+    @percentages.pop
 
-    number_of_people = people.count
+    @candidates.each_with_index{|c, i| @result[@candidates[i]] = @percentages[i]}
 
-    for i in 0...number_of_people do
-      @result[people[i]] = numbers[i]
-    end
     @result
-    
   end
-
 end
