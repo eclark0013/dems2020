@@ -2,9 +2,7 @@ Hello world!
 
 # Dems2020
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dems2020`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This CLI will give you up-to-date information on the status of the US 2020 Democratic Presidential Nomination race including short the ever-changing list of individuals running, dates of debates and current polling results.
 
 ## Installation
 
@@ -24,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Simply run the ./bin/dems2020 file and follow the on-screen prompts.
 
 ## Development
 

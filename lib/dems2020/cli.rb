@@ -4,7 +4,7 @@ class Dems2020::CLI
   attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
-    @candidates = CandidatesScraper.candidates #scrape candidates here
+    @candidates = CandidateScraper.candidates #scrape candidates here
     @input = nil
   end
 
@@ -29,17 +29,29 @@ class Dems2020::CLI
         manage_race_info_choice #returns input
       when "exit"
       else
-        puts "Your choices are:
-          Type \"C\" for more information on a specific candidate.
-          Type \"R\" for more information on the race in general.
-          Type \"exit\" to exit."
-        @input = gets.strip
+        invalid_main_menu_choice
       end
     end
   end
 
   def introduction
     puts "There are many candidates running for the democratic nomination for president. Would you like to know more about a specific candidate (bio, previous experience) or the race in general (updated list of candidates running, polling numbers). Type C for candidates or R for race. Follow the on-screen prompts. When you have decided who to vote for, you may type in \"exit\"."
+  end
+
+  def invalid_main_menu_choice
+    puts "Your choices are:
+      Type \"C\" for more information on a specific candidate.
+      Type \"R\" for more information on the race in general.
+      Type \"exit\" to exit."
+    @input = gets.strip
+  end
+
+  def invalid_race_info_choice
+    puts "Your choices are:
+    \"C\" for a list of candidates still in the race
+    \"P\" for most recent polling data
+    \"D\" for info on upcoming debates"
+    @input = gets.strip
   end
 
   # candidates methods
@@ -54,7 +66,7 @@ class Dems2020::CLI
   end
 
   def manage_candidate_choice
-    until @input.to_i.between?(1, @candidates.count) # || input == "exit"
+    until @input.to_i.between?(1, @candidates.count)
       puts "Choose from a number in the list above."
       @input = gets.strip
     end
@@ -98,27 +110,27 @@ class Dems2020::CLI
           @input = gets.strip # gets choice for main menu of C, R, or exit
         when "exit"
       else
-        puts "Your choices are:
-        \"C\" for a list of candidates still in the race
-        \"P\" for most recent polling data
-        \"D\" for info on upcoming debates"
-        @input = gets.strip
+        invalid_race_info_choice
       end
     end
   end
 
   def display_debate_info
+    puts "\n"
     puts "Primary debates:"
     DebateScraper.new.find_debates.each do |debate|
       puts debate
     end
+    puts "\n"
   end
 
   def display_polling_info
+    puts "\n"
     puts "Current polling averages via RealClearPolitics:"
     RCPScraper.new.polling_data.each do |candidate, percentage|
       puts "#{candidate}: #{percentage}%"
     end
+    puts "\n"
   end
 
   def main_menu_prompt
