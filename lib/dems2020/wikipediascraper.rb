@@ -15,6 +15,8 @@ class WikipediaScraper
       @underscore_name = "Steve_Bullock_(American_politician)"
     elsif @name == "Tim Ryan"
       @underscore_name = "Tim_Ryan_(Ohio_politician)"
+    elsif @name == "John Delaney"
+      @underscore_name = "John_Delaney_(Maryland_politician)"
     else
       @underscore_name = @name.gsub(" ", "_")
     end
@@ -53,6 +55,8 @@ class WikipediaScraper
       end
     end
   end
+  # check booker, O'Rourke, Sestak, williamson (take out [num])
+  # maybe redo this? if there is bold inside another section it gets the last bold thing
 
   def compile_info
     @info =  {
