@@ -2,7 +2,7 @@ class RCPScraper
   attr_accessor :result
 
   def initialize
-    @result = []
+    @result = {}
   end
 
   def result
@@ -16,14 +16,23 @@ class RCPScraper
     doc.css("div#polling-data-rcp th.diag").each do |person|
       people << person.text.strip
     end
-    binding.pry
 
     numbers = []
-    doc.css("div#polling-data-rcp tr.rcpAvg td").each_with_index[2]
-    @result = {
-      Person_1: "30",
-      Person_2: "25"
-    }
+    doc.css("div#polling-data-rcp tr.rcpAvg td").each_with_index do |number, index|
+      if index<2
+      else
+        numbers << number.text
+      end
+    end
+    numbers.pop
+
+    number_of_people = people.count
+
+    for i in 0...number_of_people do
+      @result[people[i]] = numbers[i]
+    end
+    @result
+    
   end
 
 end
