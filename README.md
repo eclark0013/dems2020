@@ -6,6 +6,7 @@ This CLI will give you up-to-date information on the status of the US 2020 Democ
 
 ## Installation
 
+# clone down the repo, cd into dems2020, blah, blah
 Add this line to your application's Gemfile:
 
 ```ruby

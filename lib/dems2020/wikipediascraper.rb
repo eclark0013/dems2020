@@ -2,7 +2,7 @@ require_relative "./cli"
 require "./lib/environment"
 
 class WikipediaScraper
-  attr_accessor :name, :underscore_name, :age, :education, :bio, :doc, :info
+  attr_accessor :underscore_name, :doc
 
   def initialize(name)
     @education = []
@@ -25,22 +25,16 @@ class WikipediaScraper
     end
   end
 
-  def candidate_info
-    find_age
-    find_education
-    find_bio
-    compile_info
-  end
-
-  def find_age
+  def get_age
     @doc.css("tbody tr td").each do |piece_of_info|
       if piece_of_info.text.include? "(age"
         @age = piece_of_info.text.split("age")[1][1,2]
       end
     end
+    @age
   end
 
-  def find_education
+  def get_education
     @doc.css("tbody tr").each do |tr| #makes a list of each link text under education (including degree designations)
       tr.css("th").each do |th|
         if th.text == "Education"
@@ -56,27 +50,18 @@ class WikipediaScraper
         @education.delete(school) # removes their BA or JD designation as a separate school
       end
     end
+    @education
   end
 
 
-  def find_bio
+  def get_bio
     last_name = @name.split(" ").last
     @doc.css("div.mw-parser-output p").each do |paragraph|
       if paragraph.css("b").text.include? last_name
         @bio = paragraph.text.gsub(/\[\d*\]/, "")
       end
     end
+    @bio
   end
-
-
-  def compile_info
-    @info =  {
-      name: @name,
-      age: @age,
-      education: @education.join(", "),
-      bio: @bio
-    }
-  end
-
 
 end

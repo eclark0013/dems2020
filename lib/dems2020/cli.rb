@@ -4,7 +4,7 @@ class Dems2020::CLI
   attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
-    @candidates = CandidateScraper.candidates #scrape candidates here
+    @candidates = CandidateScraper.candidates #@@all from Candidates which scrapes candidates if need be
     @input = nil
   end
 
@@ -38,8 +38,8 @@ class Dems2020::CLI
     puts "There are many candidates running for the democratic nomination for president. Would you like to know more about a specific candidate (bio, previous experience) or the race in general (updated list of candidates running, polling numbers). Type C for candidates or R for race. Follow the on-screen prompts. When you have decided who to vote for, you may type in \"exit\"."
   end
 
-  def invalid_main_menu_choice
-    puts "Your choices are:
+  def invalid_main_menu_choice # make it red
+    puts "Invalid choice. Your choices are:
     Type \"C\" for more information on a specific candidate.
     Type \"R\" for more information on the race in general.
     Type \"exit\" to exit."
@@ -57,7 +57,7 @@ class Dems2020::CLI
   # candidates methods
   def display_candidates
     puts "\nList of candidates:"
-    @candidates.each_with_index {|name,index| puts "#{index+1}. #{name}"}
+    @candidates.each_with_index {|name,index| puts "#{index+1}. #{name}"} #name becomes candidate.name
   end
 
   def candidate_info_prompt
@@ -78,7 +78,7 @@ class Dems2020::CLI
 
   def display_candidate_info
     puts "\n"
-    WikipediaScraper.new(@chosen_candidate).candidate_info.each do |category, info|
+    WikipediaScraper.new(@chosen_candidate).candidate_info.each do |category, info| #candidate class
       puts "#{category.capitalize}: #{info}"
     end
     puts "\n"
@@ -116,18 +116,16 @@ class Dems2020::CLI
   end
 
   def display_debate_info
-    puts "\n"
-    puts "Primary debates:"
-    DebateScraper.new.find_debates.each do |debate|
+    puts "\nPrimary debates:"
+    DebateScraper.new.find_debates.each do |debate| #debate data class which will only scrape if it hasn't already
       puts debate
     end
     puts "\n"
   end
 
   def display_polling_info
-    puts "\n"
-    puts "Current polling averages via RealClearPolitics:"
-    RCPScraper.new.polling_data.each do |candidate, percentage|
+    puts "\nCurrent polling averages via RealClearPolitics:"
+    RCPScraper.new.polling_data.each do |candidate, percentage| #polling data class which will only scrape if it hasn't already
       puts "#{candidate}: #{percentage}%"
     end
     puts "\n"
