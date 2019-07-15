@@ -122,15 +122,15 @@ class Dems2020::CLI
 
   def display_debate_info
     puts "\nPrimary debates:"
-    Dems2020::Debates.all.each do |debate| #debate data class which will only scrape if it hasn't already
-      puts "#{debate[:name]} on #{debate[:date]}"
+    Dems2020::Debates.all.each do |debate|
+      puts "#{debate.name} on #{debate.date}"
     end
     puts "\n"
   end
 
   def display_polling_info
     puts "\nCurrent polling averages via RealClearPolitics:"
-    Dems2020::RCPScraper.new.polling_data.each do |candidate, percentage| #polling data class which will only scrape if it hasn't already
+    Dems2020::PollingData.all.each do |candidate, percentage|
       puts "#{candidate}: #{percentage}%"
     end
     puts "\n"

@@ -4,7 +4,7 @@ class Dems2020::Candidates
   @@all = []
 
   def initialize(name)
-    @@all << self #if we haven't scraped the candidates yet, it runs all to make sure that we do that
+    @@all << self 
     @name = name
   end
 

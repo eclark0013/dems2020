@@ -8,6 +8,7 @@ require "./lib/dems2020/debatescraper"
 require "./lib/dems2020/candidates"
 require "./lib/dems2020/candidatescraper"
 require "./lib/dems2020/wikipediascraper"
+require "./lib/dems2020/pollingdata"
 require "./lib/dems2020/realclearpoliticsscraper"
 require "./lib/dems2020/cli"
 

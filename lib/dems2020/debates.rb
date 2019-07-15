@@ -1,11 +1,12 @@
 class Dems2020::Debates
-  attr_accessor :debates
+  attr_accessor :name, :date
 
-  @@all
+  @@all = []
 
-  def initialize(name)
-    @@all << self #if we haven't scraped the debates yet, it runs all to make sure that we do that
+  def initialize(name, date)
+    @@all << self
     @name = name
+    @date = date
   end
 
   def self.all
