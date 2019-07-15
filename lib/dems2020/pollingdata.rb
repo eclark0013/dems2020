@@ -1,16 +1,16 @@
 class Dems2020::PollingData
-  attr_accessor :candidate, :percentage # candidate will be the actual candididate object of the candidate class
+  attr_accessor :candidate # candidate is the actual candididate object of the candidate class
 
   @@all = []
 
   def initialize(name, percentage)
     @@all << self
-    @candidate = find_candidate(name)[0]
+    @candidate = find_candidate(name)
     @candidate.percentage = percentage
   end
 
   def find_candidate(name)
-    Dems2020::Candidates.all.select {|c| c.name.include? name}
+    Dems2020::Candidates.all.select {|c| c.name.include? name}[0]
   end
 
   def self.all
