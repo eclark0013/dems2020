@@ -1,6 +1,6 @@
 require "./lib/environment"
 
-class DebateScraper
+class Dems2020::DebateScraper
   attr_accessor :debates
 
   def initialize

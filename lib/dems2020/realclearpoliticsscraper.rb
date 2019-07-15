@@ -1,6 +1,6 @@
 require "./lib/environment"
 
-class RCPScraper
+class Dems2020::RCPScraper
   attr_accessor :result, :candidates
 
   def initialize

@@ -1,8 +1,8 @@
 require_relative "./cli"
 require "./lib/environment"
 
-class WikipediaScraper
-  attr_accessor :underscore_name, :doc
+class Dems2020::WikipediaScraper
+  attr_accessor :underscore_name, :doc, :name, :age, :education, :bio
 
   def initialize(name)
     @education = []

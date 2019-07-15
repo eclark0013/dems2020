@@ -4,8 +4,9 @@ class Dems2020::CLI
   attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
-    @candidates = CandidateScraper.candidates #@@all from Candidates which scrapes candidates if need be
+    @candidates = Dems2020::Candidates.all #@@all from Candidates which scrapes candidates if need be
     @input = nil
+  #  binding.pry
   end
 
 
@@ -47,17 +48,22 @@ class Dems2020::CLI
   end
 
   def invalid_race_info_choice
-    puts "Your choices are:
+    puts "Invalid choice. Your choices are:
     \"C\" for a list of candidates still in the race
     \"P\" for most recent polling data
     \"D\" for info on upcoming debates"
     @input = gets.strip
   end
 
+  def invalid_candidate_choice
+    puts "Invalid choice. Choose from a number in the list above."
+    @input = gets.strip
+  end
+
   # candidates methods
   def display_candidates
     puts "\nList of candidates:"
-    @candidates.each_with_index {|name,index| puts "#{index+1}. #{name}"} #name becomes candidate.name
+    @candidates.each_with_index {|candidate,index| puts "#{index+1}. #{candidate.name}"} #name becomes candidate.name
   end
 
   def candidate_info_prompt
@@ -67,8 +73,7 @@ class Dems2020::CLI
 
   def manage_candidate_choice
     until @input.to_i.between?(1, @candidates.count)
-      puts "Choose from a number in the list above."
-      @input = gets.strip
+      invalid_candidate_choice
     end
     @chosen_candidate = @candidates[@input.to_i-1]
     display_candidate_info
@@ -78,7 +83,7 @@ class Dems2020::CLI
 
   def display_candidate_info
     puts "\n"
-    WikipediaScraper.new(@chosen_candidate).candidate_info.each do |category, info| #candidate class
+    @chosen_candidate.info.each do |category, info| #@chosen_candidate is an instance of the candidate class created in #manage_candidate_choice
       puts "#{category.capitalize}: #{info}"
     end
     puts "\n"
@@ -94,7 +99,7 @@ class Dems2020::CLI
   end
 
   def manage_race_info_choice
-    until @input == "exit" || @input == "C" # creates a loop that allows user to exit or choose C for info on a specific candidate
+    until @input == "exit" || @input == "C" || @input == "R" # creates a loop that allows user to exit or choose C for info on a specific candidate
       case @input # double case here?
         when "C"
           display_candidates
@@ -117,7 +122,7 @@ class Dems2020::CLI
 
   def display_debate_info
     puts "\nPrimary debates:"
-    DebateScraper.new.find_debates.each do |debate| #debate data class which will only scrape if it hasn't already
+    Dems2020::DebateScraper.new.find_debates.each do |debate| #debate data class which will only scrape if it hasn't already
       puts debate
     end
     puts "\n"
@@ -125,7 +130,7 @@ class Dems2020::CLI
 
   def display_polling_info
     puts "\nCurrent polling averages via RealClearPolitics:"
-    RCPScraper.new.polling_data.each do |candidate, percentage| #polling data class which will only scrape if it hasn't already
+    Dems2020::RCPScraper.new.polling_data.each do |candidate, percentage| #polling data class which will only scrape if it hasn't already
       puts "#{candidate}: #{percentage}%"
     end
     puts "\n"
