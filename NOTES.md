@@ -4,7 +4,7 @@ Start with the entry point
 force that to build the CLI interface
 stub out the interface
 start making things real
-discvoer objects
+discover objects
 program
 
 1. interface

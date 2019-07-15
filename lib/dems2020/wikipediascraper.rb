@@ -41,7 +41,7 @@ class WikipediaScraper
   end
 
   def find_education
-    @doc.css("tbody tr").each do |tr|
+    @doc.css("tbody tr").each do |tr| #makes a list of each link text under education (including degree designations)
       tr.css("th").each do |th|
         if th.text == "Education"
           tr.css("td a").each do |link|
@@ -50,18 +50,12 @@ class WikipediaScraper
         end
       end
     end
-    @education.each do |school|
-      if school.length < 5
-        @education = @education - [school]
+    @education.each_with_index do |school,i|
+      if i > 0 && school.length < 5
+        @education[i-1] = "#{@education[i-1]} (#{school})" # adds on their BA or JD designation to that school
+        @education.delete(school) # removes their BA or JD designation as a separate school
       end
     end
-#    @education.each_with_index do |school,i|
-#      if @education[i+1] == nil #make it not do the last one
-#      elsif @education[i+1].length < 5
-#        @education[i] = "#{school} (#{@education[i+1]})" # adds on their BA or JD designation to that school
-#        @education = @education - [@education[i+1]] # removes their BA or JD designation as a separate school
-#      end
-#    end
   end
 
 
