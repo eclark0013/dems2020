@@ -10,7 +10,7 @@ class Dems2020::Candidates
 
   def self.all
     if @@all = []
-      @@all = Dems2020::CandidateScraper.candidates
+      @@all = Dems2020::CandidateScraper.get_candidates
     end
     @@all
   end

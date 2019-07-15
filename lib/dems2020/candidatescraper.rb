@@ -2,7 +2,7 @@
 
 class Dems2020::CandidateScraper
 
-  def self.candidates # https://ballotpedia.org/Presidential_candidates,_2020
+  def self.get_candidates # https://ballotpedia.org/Presidential_candidates,_2020
     candidates = []
     doc = Nokogiri::HTML(open("https://ballotpedia.org/Presidential_candidates,_2020"))
     doc.css("div.mobile-columns ul").first.css("li").each do |name_line|

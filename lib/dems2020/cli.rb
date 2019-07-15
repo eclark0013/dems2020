@@ -43,7 +43,7 @@ class Dems2020::CLI
     puts "Invalid choice. Your choices are:
     Type \"C\" for more information on a specific candidate.
     Type \"R\" for more information on the race in general.
-    Type \"exit\" to exit."
+    Type \"exit\" to exit.".colorize(:red)
     @input = gets.strip
   end
 
@@ -51,12 +51,12 @@ class Dems2020::CLI
     puts "Invalid choice. Your choices are:
     \"C\" for a list of candidates still in the race
     \"P\" for most recent polling data
-    \"D\" for info on upcoming debates"
+    \"D\" for info on upcoming debates".colorize(:red)
     @input = gets.strip
   end
 
   def invalid_candidate_choice
-    puts "Invalid choice. Choose from a number in the list above."
+    puts "Invalid choice. Choose from a number in the list above.".colorize(:red)
     @input = gets.strip
   end
 
@@ -122,8 +122,8 @@ class Dems2020::CLI
 
   def display_debate_info
     puts "\nPrimary debates:"
-    Dems2020::DebateScraper.new.find_debates.each do |debate| #debate data class which will only scrape if it hasn't already
-      puts debate
+    Dems2020::Debates.all.each do |debate| #debate data class which will only scrape if it hasn't already
+      puts "#{debate[:name]} on #{debate[:date]}"
     end
     puts "\n"
   end
