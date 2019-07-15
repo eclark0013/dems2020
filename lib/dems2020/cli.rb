@@ -130,8 +130,8 @@ class Dems2020::CLI
 
   def display_polling_info
     puts "\nCurrent polling averages via RealClearPolitics:"
-    Dems2020::PollingData.all.each do |candidate, percentage|
-      puts "#{candidate}: #{percentage}%"
+    Dems2020::PollingData.all.each do |datum|
+      puts "#{datum.candidate.name}: #{datum.candidate.percentage}%"
     end
     puts "\n"
   end

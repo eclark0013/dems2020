@@ -1,10 +1,15 @@
 class Dems2020::Candidates
-  attr_accessor :name, :age, :education, :bio, :info # move to Candidate class
+  attr_accessor :name, :age, :education, :bio, :info, :percentage # move to Candidate class
 
+
+  def percentage=(num)
+    @percentage = num
+  end
+  
   @@all = []
 
   def initialize(name)
-    @@all << self 
+    @@all << self
     @name = name
   end
 
