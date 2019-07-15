@@ -5,21 +5,10 @@ Hello world!
 This CLI will give you up-to-date information on the status of the US 2020 Democratic Presidential Nomination race including short the ever-changing list of individuals running, dates of debates and current polling results.
 
 ## Installation
+For access:
+Clone down the repo and cd into dems2020.
+Then run the CLI through executing ./bin/dems2020.
 
-# clone down the repo, cd into dems2020, blah, blah
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'dems2020'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install dems2020
 
 ## Usage
 
