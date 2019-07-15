@@ -10,7 +10,7 @@ class Dems2020::DebateScraper
       if table_cell.text.include? "debate"
         @name = table_cell.text.strip
         @date = doc.css("div.mw-content-ltr table td")[i+1].text.strip
-        @debates << Dems2020::Debates.new(@name, @date)
+        @debates << Dems2020::Debate.new(@name, @date)
       end
     end
     @debates

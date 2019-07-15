@@ -4,7 +4,7 @@ class Dems2020::CLI
   attr_accessor :candidates, :input, :chosen_candidate
 
   def initialize
-    @candidates = Dems2020::Candidates.all #@@all from Candidates which scrapes candidates if need be
+    @candidates = Dems2020::Candidate.all #@@all from Candidates which scrapes candidates if need be
     @input = nil
   #  binding.pry
   end
@@ -122,7 +122,7 @@ class Dems2020::CLI
 
   def display_debate_info
     puts "\nPrimary debates:"
-    Dems2020::Debates.all.each do |debate|
+    Dems2020::Debate.all.each do |debate|
       puts "#{debate.name} on #{debate.date}"
     end
     puts "\n"

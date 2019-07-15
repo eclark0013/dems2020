@@ -7,7 +7,7 @@ class Dems2020::CandidateScraper
     doc = Nokogiri::HTML(open("https://ballotpedia.org/Presidential_candidates,_2020"))
     doc.css("div.mobile-columns ul").first.css("li").each do |name_line|
       candidate = name_line.text.gsub(/ \(.*/, "")
-      candidates << Dems2020::Candidates.new(candidate)
+      candidates << Dems2020::Candidate.new(candidate)
     end
     candidates
   end

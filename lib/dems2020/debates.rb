@@ -1,4 +1,4 @@
-class Dems2020::Debates
+class Dems2020::Debate
   attr_accessor :name, :date
 
   @@all = []

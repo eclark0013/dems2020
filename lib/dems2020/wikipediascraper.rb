@@ -53,7 +53,6 @@ class Dems2020::WikipediaScraper
     @education
   end
 
-
   def get_bio
     last_name = @name.split(" ").last
     @doc.css("div.mw-parser-output p").each do |paragraph|

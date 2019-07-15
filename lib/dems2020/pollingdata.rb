@@ -10,7 +10,7 @@ class Dems2020::PollingData
   end
 
   def find_candidate(name)
-    Dems2020::Candidates.all.select {|c| c.name.include? name}[0]
+    Dems2020::Candidate.all.select {|c| c.name.include? name}[0]
   end
 
   def self.all
