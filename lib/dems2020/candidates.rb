@@ -1,10 +1,5 @@
 class Dems2020::Candidate
-  attr_accessor :name, :age, :education, :bio, :info, :percentage # move to Candidate class
-
-
-  def percentage=(num)
-    @percentage = num
-  end
+  attr_accessor :name, :age, :education, :bio, :info
 
   @@all = []
 
