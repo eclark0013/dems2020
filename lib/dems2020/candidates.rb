@@ -1,5 +1,5 @@
 class Dems2020::Candidate
-  attr_accessor :name, :age, :education, :bio, :info
+  attr_accessor :name, :age, :education, :bio, :info, :percentage
 
   @@all = []
 
