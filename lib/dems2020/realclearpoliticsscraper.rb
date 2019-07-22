@@ -4,7 +4,7 @@ class Dems2020::RCPScraper
   attr_accessor :doc, :data, :top_candidates, :percentages
 
   def initialize
-    @raw_data = {}
+    @raw_data = {} #data from scraper unconnected to particular candidates, but associated with the name string
     @data = []
     @top_candidates = []
     @percentages = []

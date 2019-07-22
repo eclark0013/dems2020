@@ -6,7 +6,6 @@ class Dems2020::CLI
   def initialize
     @candidates = Dems2020::Candidate.all #@@all from Candidates which scrapes candidates if need be
     @input = nil
-  #  binding.pry
   end
 
 
