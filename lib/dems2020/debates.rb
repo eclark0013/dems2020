@@ -11,7 +11,7 @@ class Dems2020::Debate
 
   def self.all
     if @@all = []
-      @@all = Dems2020::DebateScraper.get_debates
+      @@all = Dems2020::DateScraper.new.get_debates
     end
     @@all
   end
