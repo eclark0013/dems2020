@@ -122,7 +122,8 @@ class Dems2020::CLI
   def display_debate_info
     puts "\nPrimary debates:"
     Dems2020::Debate.all.each do |debate|
-      puts "\n#{debate.name}\nDate: #{debate.date}\nLocation: #{debate.location}\nNetwork: #{debate.network}\nParticipants: #{debate.participants}"
+      puts "\n#{debate.name}".colorize(:blue)
+      puts "Date: #{debate.date}\nLocation: #{debate.location}\nNetwork: #{debate.network}\nParticipants: #{debate.participants}"
     end
     puts "\n"
   end
