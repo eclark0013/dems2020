@@ -122,7 +122,7 @@ class Dems2020::CLI
   def display_debate_info
     puts "\nPrimary debates:"
     Dems2020::Debate.all.each do |debate|
-      puts "#{debate.name} on #{debate.date}"
+      puts "\n#{debate.name}\nDate: #{debate.date}\nLocation: #{debate.location}\nNetwork: #{debate.network}\nParticipants: #{debate.participants}"
     end
     puts "\n"
   end
