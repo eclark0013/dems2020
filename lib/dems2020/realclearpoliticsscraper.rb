@@ -20,7 +20,6 @@ class Dems2020::RCPScraper
 
   def get_percentages
     doc.css("div#polling-data-rcp tr.rcpAvg td").each_with_index do |percentage, index|
-      binding.pry
       if index<3
       else
         @percentages << percentage.text
